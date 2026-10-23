@@ -51,7 +51,7 @@ Deployed: https://sepolia.etherscan.io/address/0xc91c858497795bE246E4f6aBe062796
 Fixed-duration NFT staking with a per-stake ETH reward and pull-over-push payout.
 
 **Tool:** Hardhat 3 (Mocha + Ethers.js + TypeScript)
-**Tests:** 18 passing (`npx hardhat test`)
+**Tests:** 18 deterministic (Hardhat) + 2 fuzz invariants × 128,000 transitions (Foundry)
 **Deployed:** Sepolia (production + 60-second demo variant), both verified
 **Spec:** [`INVARIANTS.md`](./nft-staking/INVARIANTS.md) — 10 invariants, each
 with a positive and an adversarial test
@@ -67,6 +67,12 @@ What it demonstrates:
   tested with a malicious receiver that attempts reentry
 - **Versioned migration** — v1.0 (push payout, 14 tests) → v1.1
   (pull-over-push, 18 tests), each tagged and documented
+
+- **Fuzz-tested invariants** — Foundry stateful fuzzing verifies I1 and
+  I4+I10 across 128,000 randomized stake/unstake/withdraw/fund sequences.
+  Sabotage-validated: removing the pool decrement in `stake` produces a
+  counterexample on the first run, proving the fuzzer catches the class of
+  bug it's meant to catch.
 
 Repo: https://github.com/victorikechukwuattansey-freelance/nft-staking
 Deployed (7-day): https://sepolia.etherscan.io/address/0x27DbE8BBB484BF8885d856d7f66182A7f3189aaE
