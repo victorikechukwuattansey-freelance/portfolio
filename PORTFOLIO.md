@@ -1,8 +1,16 @@
 # Smart Contract Portfolio
 
-Three Solidity projects, each built from first principles — spec before code,
-adversarial tests for every invariant, and documented limitations as part of
-the deliverable.
+Four repos, each answering a different question about what I can be trusted to do:
+
+- **ERC-20** — can I compose from audited primitives and reason about override ordering?
+- **NFT** — can I distinguish what a standard includes from what an extension adds?
+- **Staking** — can I write down invariants before the code and prove them with fuzz?
+- **Reentrancy Lab** — can I reason about a bug class rather than patch a single bug?
+
+Each repo has a specification that predates the code, adversarial tests that
+would fail if the specification were violated, documented limitations, and
+green CI. The fifth repo (in progress) applies this discipline to **real code
+I did not write**—which is what an audit actually is.
 
 ## 1. ERC-20 Token (`my-erc-20-token`)
 
