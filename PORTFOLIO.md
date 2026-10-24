@@ -78,6 +78,32 @@ Repo: https://github.com/victorikechukwuattansey-freelance/nft-staking
 Deployed (7-day): https://sepolia.etherscan.io/address/0x27DbE8BBB484BF8885d856d7f66182A7f3189aaE
 Deployed (60-sec demo): https://sepolia.etherscan.io/address/0xF96DF232c796c1ac9B5a18700AF487AF090B913d
 
+## 4. Reentrancy Lab (`reentrancy-lab`)
+
+Three reentrancy variants with working exploit PoCs, fixes, and regression
+tests — structured as an audit report rather than a tutorial.
+
+**Tool:** Foundry
+**Tests:** 9 passing (`forge test`)
+**Findings:** Critical / High / Medium
+
+What it demonstrates:
+- **Three-class taxonomy** — same-function (the DAO shape), cross-function
+  (local guard bypassed via a second entry point), read-only (no state
+  modified; a third-party integrator reads a view during a callback)
+- **Exploit → fix → regression per finding** — every fix has a
+  `test_NormalOperationStillWorks` that proves the fix doesn't break the
+  product
+- **Audit-report README** — scope, severity, root cause, PoC, impact,
+  remediation, retest, and **documented residual risk**. Finding 3 explicitly
+  names what its fix does not cover, which is the difference between a
+  developer's fix and an auditor's.
+- **The lesson across all three** — a reentrancy guard protects a function,
+  not a state. Reentrancy can exist without any attacker-written state if a
+  view function is observable at the wrong moment.
+
+Repo: https://github.com/victorikechukwuattansey-freelance/reentrancy-lab
+
 ## Common discipline across all three
 
 Every repo has:
